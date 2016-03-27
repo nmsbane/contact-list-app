@@ -18,6 +18,13 @@
 					<th>Number</th>
 				</tr>
 			</thead>
+			<tbody>
+				<tr ng-repeat="contact in contactList">
+					<td>{{ contact.name }}</td>
+					<td>{{ contact.email }}</td>
+					<td>{{ contact.number }}</td>
+				</tr>
+			</tbody>
 		</table>
 	</div>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
