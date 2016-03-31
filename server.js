@@ -42,6 +42,30 @@ app.post('/contactlist', function(req, res) {
 		res.json(docs);
 	})
 
+});
+
+app.delete('/contactlist/:id', function(req, res) {
+	var id = req.params.id;
+	contactlist.findByIdAndRemove(id, {}, function(err, doc) {
+		console.log(doc);
+		res.json(doc);
+	})
+});
+
+app.get('/contactlist/:id', function(req, res) {
+	var id = req.params.id;
+	contactlist.findById(id, function(err, doc) {
+		res.json(doc);
+	});
+});
+
+
+app.put('/contactlist/:id', function(req, res) {
+	var id = req.params.id;
+	console.log(req.body);
+	contactlist.findByIdAndUpdate(id, {$set: {name: req.body.name, email: req.body.email, number: req.body.number }}, {new:true}, function(err, doc){
+		res.json(doc);
+	})
 })
 
 app.listen(3000);
