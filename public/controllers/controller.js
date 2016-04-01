@@ -15,11 +15,37 @@ myApp.controller('AppCtrl', ["$scope", "$http",  function($scope, $http) {
 
 	
 	$scope.addContact = function(){
-		$http.post('/contactlist', $scope.contact).success(function(response) {
+		var emailRegex = /\S+@\S+\.\S+/;
+		var numberRegex = /^\d{10}$/;
+		var nameRegex = /^[a-zA-Z]{2,30}$/;
+
+		var isValidate = true;
+		$scope.isNameNotValid = false;
+		$scope.isEmailNotValid = false;
+		$scope.isNumberNotValid = false;
+		// validate name
+		if(!nameRegex.test($scope.contact.name) || !($scope.contact.name)) {
+			$scope.isNameNotValid = true;
+			isValidate = false;
+		};
+		// validate email address
+		if(!emailRegex.test($scope.contact.email)){
+			$scope.isEmailNotValid = true;
+			isValidate = false;
+		};
+		// validate mobile number
+		if(!numberRegex.test($scope.contact.number)){
+			$scope.isNumberNotValid = true;
+			isValidate = false;
+		};
+		// if every field is valid, then only call the post method
+		if(isValidate) {
+			$http.post('/contactlist', $scope.contact).success(function(response) {
 			console.log("calling refresh function");
 			refresh();
-		});
-
+			});
+		}
+		
 	}
 
 	$scope.remove = function(id){

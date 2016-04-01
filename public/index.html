@@ -6,6 +6,12 @@
 
 <!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<style type="text/css">
+	.help-block {
+		color: red;
+	}
+	</style>
 </head>
 <body>
 	<div class="container" ng-controller="AppCtrl">
@@ -21,9 +27,18 @@
 			</thead>
 			<tbody>
 				<tr></tr>
-					<td><input class="form-control" ng-model="contact.name"></td>
-					<td><input class="form-control" ng-model="contact.email"></td>
-					<td><input class="form-control" ng-model="contact.number"></td>
+					<td>
+		            	<input type="text" name="name" class="form-control" ng-model="contact.name" required>
+		            	<p ng-show="isNameNotValid" class="help-block">Enter a valid name</p>
+		        	</div>
+		        	</td>
+					<td>
+				            <input type="email" name="email" class="form-control" ng-model="contact.email">
+				            <p ng-show="isEmailNotValid" class="help-block">Enter a valid email.</p>
+					</td>
+					<td><input class="form-control" ng-model="contact.number">
+						<p ng-show="isNumberNotValid" class="help-block">Enter a 10 digit mobile number</p>
+					</td>
 					<td><button class="btn btn-primary" ng-click="addContact()">Add Contact</button>
 					&nbsp; &nbsp;
 					<button class="btn btn-info" ng-click="edit()">Update</button>
